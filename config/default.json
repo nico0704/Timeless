@@ -1,3 +1,4 @@
 {
-  "mongoURI": "mongodb+srv://nico42:nico42@timeless.dnpsq.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+  "mongoURI": "mongodb+srv://nico42:nico42@timeless.dnpsq.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
+  "jwtSecret": "mySecretToken"
 }
