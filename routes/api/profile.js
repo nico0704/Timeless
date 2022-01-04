@@ -131,11 +131,34 @@ router.put(
       image = req.file.path;
     }
     const newExp = { title, date, location, description, tag, image };
-    console.log(newExp);
 
     try {
       const profile = await Profile.findOne({ user: req.user.id });
-      profile.experience.unshift(newExp);
+      const newExpDateInMs = new Date(newExp.date).getTime();
+
+      // @todo implement a better search algorithm
+
+      if (
+        //length check has to be checked first otherwise programm will throw an error
+        // because experience[0] is not defined
+        profile.experience.length == 0 ||
+        newExpDateInMs > profile.experience[0].date.getTime()
+      ) {
+        profile.experience.unshift(newExp);
+      } else {
+        let curDateInMs = 0;
+        let index = 0;
+        for (var i = 1; i < profile.experience.length; i++) {
+          curDateInMs = new Date(profile.experience[i].date).getTime();
+          if (newExpDateInMs < curDateInMs) {
+            index = i;
+          }
+        }
+        index++;
+        profile.experience.splice(index, 0, newExp);
+      }
+
+      // save profile
       await profile.save();
       res.json(profile);
     } catch (err) {
