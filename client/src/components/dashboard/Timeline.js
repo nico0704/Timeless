@@ -1,26 +1,41 @@
-import React, { Fragment } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import Moment from "react-moment";
+
+// Timeline Imports
+import {
+  VerticalTimeline,
+  VerticalTimelineElement,
+} from "react-vertical-timeline-component";
+import { ReactComponent as SchoolIcon } from "./school.svg";
+import "react-vertical-timeline-component/style.min.css";
 
 const Timeline = ({ experience }) => {
-  const experiences = experience.map((exp) => (
-    <tr key={exp._id}>
-      <td>{exp.title}</td>
-      <td>
-        <Moment format="YYYY/MM/DD">{exp.date}</Moment>
-      </td>
-      <td>{exp.location}</td>
-      <td>{exp.description}</td>
-    </tr>
-  ));
-
+  let schoolIconStyles = { background: "#f9c74f" };
   return (
-    <Fragment>
-      <table className="table">
-        <tbody>{experiences}</tbody>
-      </table>
-    </Fragment>
+    <div>
+      <VerticalTimeline>
+        {experience.map((element) => {
+          return (
+            <VerticalTimelineElement
+              key={element._id}
+              //date={element.date}
+              iconStyle={schoolIconStyles}
+              icon={<SchoolIcon />}
+            >
+              <img src={element.image} alt="Something"></img>
+              <h3 className="vertical-timeline-element-title">
+                {element.title}
+              </h3>
+              <h5 className="vertical-timeline-element-subtitle">
+                {element.location}
+              </h5>
+              <p id="description">{element.description}</p>
+            </VerticalTimelineElement>
+          );
+        })}
+      </VerticalTimeline>
+    </div>
   );
 };
 
