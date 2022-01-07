@@ -184,7 +184,7 @@ router.get(
         return res.status(400).json({ msg: "Profile not found" });
       }
 
-      let ind;
+      let ind = -1;
       for (var i = 0; i < profile.experience.length; i++) {
         let curId = profile.experience[i]._id.toString();
         if (curId == req.params.exp_id) {
@@ -192,7 +192,8 @@ router.get(
           break;
         }
       }
-      if (!ind) {
+      // no index in experience array was found that matches req.params.exp_id
+      if (ind == -1) {
         return res.status(400).json({ msg: "Experience not found" });
       }
 
@@ -233,7 +234,7 @@ router.put(
       if (!profile) {
         return res.status(400).json({ msg: "No profile found" });
       }
-      let ind;
+      let ind = -1;
       for (var i = 0; i < profile.experience.length; i++) {
         let curId = profile.experience[i]._id.toString();
         console.log(curId);
@@ -242,7 +243,8 @@ router.put(
           break;
         }
       }
-      if (!ind) {
+      // implement function to search for the correct place in object experience
+      if (ind == -1) {
         return res.status(400).json({ msg: "Experience not found" });
       }
       const { title, date, location, description } = req.body;
@@ -269,7 +271,7 @@ router.delete("/experience/:exp_id", auth, async (req, res) => {
   try {
     const profile = await Profile.findOne({ user: req.user.id });
     // get remove index
-    let ind;
+    let ind = -1;
     for (var i = 0; i < profile.experience.length; i++) {
       let curId = profile.experience[i]._id.toString();
       if (curId == req.params.exp_id) {
@@ -277,7 +279,7 @@ router.delete("/experience/:exp_id", auth, async (req, res) => {
         break;
       }
     }
-    if (!ind) {
+    if (ind == -1) {
       return res.status(400).json({ msg: "Experience not found" });
     }
     // delete exp
