@@ -18,9 +18,16 @@ const Dashboard = ({
 
   return loading && profile == null ? (
     <Spinner />
-  ) : (
+  ) : profile != null ? (
     <Fragment>
       <Timeline experience={profile.experience} />
+    </Fragment>
+  ) : (
+    <Fragment>
+      <p>You have not yet setup a Timeline, please add some info</p>
+      <Link to="/create-profile" className="btn btn-primary my-1">
+        Create Profile
+      </Link>
     </Fragment>
   );
 };

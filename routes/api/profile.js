@@ -36,6 +36,7 @@ router.post(
   [
     auth,
     [
+      check("firstName", "Name is required").not().isEmpty(),
       check("age", "Age is required").not().isEmpty(),
       check("bio", "Bio is required").not().isEmpty(),
     ],
@@ -46,22 +47,22 @@ router.post(
       res.status(400).json({ errors: errors.array() });
       return;
     }
-    const { age, bio, youtube, twitter, facebook, linkedin, instagram } =
-      req.body;
+    const { firstName, age, bio } = req.body;
 
     // Build profile object
     const profileFields = {};
     profileFields.user = req.user.id;
+    if (firstName) profileFields.firstName = firstName;
     if (age) profileFields.age = age;
     if (bio) profileFields.bio = bio;
 
     // Build social object
-    profileFields.social = {};
-    if (youtube) profileFields.social.youtube = youtube;
-    if (twitter) profileFields.social.twitter = twitter;
-    if (facebook) profileFields.social.facebook = facebook;
-    if (linkedin) profileFields.social.linkedin = linkedin;
-    if (instagram) profileFields.social.instagram = instagram;
+    // profileFields.social = {};
+    // if (youtube) profileFields.social.youtube = youtube;
+    // if (twitter) profileFields.social.twitter = twitter;
+    // if (facebook) profileFields.social.facebook = facebook;
+    // if (linkedin) profileFields.social.linkedin = linkedin;
+    // if (instagram) profileFields.social.instagram = instagram;
 
     try {
       let profile = await Profile.findOne({ user: req.user.id });
