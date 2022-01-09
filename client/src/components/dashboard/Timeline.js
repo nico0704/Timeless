@@ -11,10 +11,10 @@ import { ReactComponent as SchoolIcon } from "./school.svg";
 import "react-vertical-timeline-component/style.min.css";
 
 const Timeline = ({ experience }) => {
-  let schoolIconStyles = { background: "#f9c74f" };
+  let schoolIconStyles = { background: "#ecd76c" };
   return (
     <div>
-      <VerticalTimeline>
+      <VerticalTimeline lineColor={"#ffffffd0"}>
         {experience.map((element) => {
           return (
             <VerticalTimelineElement

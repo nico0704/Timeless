@@ -89,15 +89,18 @@ const AddExperience = ({ addExperience, history }) => {
           />
         </div>
         <div className="form-group">
-          <input
-            type="file"
-            id="image"
-            accept=".jpg"
-            onChange={(event) => {
-              const image = event.target.files[0];
-              setImage(image);
-            }}
-          />
+          <label class="custom-file-upload">
+            <input
+              type="file"
+              id="image"
+              accept=".jpg, .png, .jpeg"
+              onChange={(event) => {
+                const image = event.target.files[0];
+                setImage(image);
+              }}
+            />
+            <i class="fas fa-image"></i> Upload Image
+          </label>
         </div>
       </form>
       <button className="btn btn-primary my-1" onClick={send}>

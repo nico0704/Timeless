@@ -21,12 +21,14 @@ const Navbar = ({
       {profile !== null ? (
         <li>
           <Link to="/add-experience">
+            <i className="fas fa-plus-circle"></i>{" "}
             <span className="hide-sm">Add Experience</span>
           </Link>
         </li>
       ) : (
         <li>
           <Link to="/create-profile">
+            <i className="fas fa-user-plus"></i>{" "}
             <span className="hide-sm">Create Profile</span>
           </Link>
         </li>
@@ -61,7 +63,7 @@ const Navbar = ({
     <nav className="navbar bg-dark">
       <h1>
         <Link to="/">
-          <i className="fas fa-code"></i> Timeless
+          <i className="fas fa-infinity"></i> Timeless
         </Link>
       </h1>
       {!loading && (

@@ -1,11 +1,11 @@
 /* Global Styles */
 :root {
-  --primary-color: #686559;
+  --primary-color: #343a40;
   --dark-color: #343a40;
-  --light-color: #fffefe;
+  --light-color: #ffffffd0;
   --danger-color: #dc3545;
   --success-color: #28a745;
-  --background-color: #d6c45e;
+  --background-color: #dacb7c;
 }
 
 * {
@@ -33,6 +33,22 @@ ul {
 
 img {
   width: 100%;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+.custom-file-upload {
+  border: 3px solid var(--primary-color);
+  display: inline-block;
+  text-align: center;
+  padding: 8px 14px;
+  cursor: pointer;
+}
+.custom-file-upload:hover {
+  background-color: var(--primary-color);
+  color: rgb(255, 255, 255);
 }
 
 /* Utilities */
