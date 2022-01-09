@@ -119,6 +119,7 @@ router.post(
     [
       check("title", "Title is required").not().isEmpty(),
       check("date", "Date is required").not().isEmpty(),
+      check("description", "Desciption is required").not().isEmpty(),
     ],
   ],
   async (req, res) => {

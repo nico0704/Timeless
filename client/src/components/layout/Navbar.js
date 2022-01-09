@@ -1,13 +1,36 @@
 import React from "react";
-import { Fragment } from "react";
+import { Fragment, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { logout } from "../../actions/auth";
+import { getCurrentProfile } from "../../actions/profile";
 
-const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
+const Navbar = ({
+  auth: { isAuthenticated, loading },
+  logout,
+  getCurrentProfile,
+  profile: { profile },
+}) => {
+  useEffect(() => {
+    getCurrentProfile();
+  }, [getCurrentProfile]);
+
   const authLinks = (
     <ul>
+      {profile !== null ? (
+        <li>
+          <Link to="/add-experience">
+            <span className="hide-sm">Add Experience</span>
+          </Link>
+        </li>
+      ) : (
+        <li>
+          <Link to="/create-profile">
+            <span className="hide-sm">Create Profile</span>
+          </Link>
+        </li>
+      )}
       <li>
         <Link to="/dashboard">
           <i className="fas fa-user"></i>{" "}
@@ -51,8 +74,11 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
 Navbar.propTypes = {
   logout: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
+  getCurrentProfile: PropTypes.func.isRequired,
+  profile: PropTypes.object.isRequired,
 };
 const mapStateToProps = (state) => ({
   auth: state.auth,
+  profile: state.profile,
 });
-export default connect(mapStateToProps, { logout })(Navbar);
+export default connect(mapStateToProps, { logout, getCurrentProfile })(Navbar);

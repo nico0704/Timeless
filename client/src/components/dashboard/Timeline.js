@@ -30,7 +30,7 @@ const Timeline = ({ experience }) => {
               <h5 className="vertical-timeline-element-subtitle">
                 {element.location}
               </h5>
-              <p id="description">{element.description}</p>
+              <p>{element.description}</p>
             </VerticalTimelineElement>
           );
         })}

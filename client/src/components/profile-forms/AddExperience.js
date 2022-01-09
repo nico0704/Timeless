@@ -4,89 +4,108 @@ import { connect } from "react-redux";
 import { addExperience } from "../../actions/profile";
 import { Link, withRouter } from "react-router-dom";
 import FileUploadComponent from "./FileUpload";
+import axios from "axios";
 
 const AddExperience = ({ addExperience, history }) => {
-  const [formData, setFormData] = useState({
-    title: "",
-    date: "",
-    location: "",
-    description: "",
-    tag: "",
-    image: "",
-  });
+  const [title, setTitle] = useState();
+  const [date, setDate] = useState();
+  const [location, setLocation] = useState();
+  const [description, setDescription] = useState();
+  const [tag, setTag] = useState();
+  const [image, setImage] = useState();
 
-  const { title, date, location, description, tag, image } = formData;
+  const send = (event) => {
+    const data = new FormData();
 
-  const onChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    data.append("title", title);
+    data.append("date", date);
+    data.append("location", location);
+    data.append("description", description);
+    data.append("tag", tag);
+    data.append("image", image);
+
+    addExperience(data, history);
   };
 
   return (
     <Fragment>
       <h1 className="large text-primary">Add An Experience</h1>
       <small>* = required field</small>
-      <form
-        className="form"
-        onSubmit={(e) => {
-          e.preventDefault();
-          addExperience(formData, history);
-        }}
-      >
+      <form className="form" action="#">
         <div className="form-group">
           <input
             type="text"
-            placeholder="* Title"
-            name="title"
-            value={title}
-            onChange={(e) => onChange(e)}
-            required
+            id="title"
+            placeholder="Title"
+            onChange={(event) => {
+              const { value } = event.target;
+              setTitle(value);
+            }}
           />
         </div>
         <div className="form-group">
           <input
             type="date"
-            name="date"
-            value={date}
-            onChange={(e) => onChange(e)}
-            required
+            id="date"
+            onChange={(event) => {
+              const { value } = event.target;
+              setDate(value);
+            }}
           />
         </div>
         <div className="form-group">
           <input
             type="text"
+            id="location"
             placeholder="Location"
-            name="location"
-            value={location}
-            onChange={(e) => onChange(e)}
-          />
-        </div>
-        <div className="form-group">
-          <input
-            type="text"
-            placeholder="Tag"
-            name="tag"
-            value={tag}
-            onChange={(e) => onChange(e)}
+            onChange={(event) => {
+              const { value } = event.target;
+              setLocation(value);
+            }}
           />
         </div>
         <div className="form-group">
           <textarea
-            name="description"
+            type="text"
+            id="description"
             cols="30"
             rows="5"
             placeholder="Description"
-            value={description}
-            onChange={(e) => onChange(e)}
-          ></textarea>
+            onChange={(event) => {
+              const { value } = event.target;
+              setDescription(value);
+            }}
+          />
         </div>
         <div className="form-group">
-          <FileUploadComponent />
+          <input
+            type="text"
+            id="tag"
+            placeholder="Tag"
+            onChange={(event) => {
+              const { value } = event.target;
+              setTag(value);
+            }}
+          />
         </div>
-        <input type="submit" className="btn btn-primary my-1" />
-        <Link className="btn btn-light my-1" to="/dashboard">
-          Go Back
-        </Link>
+        <div className="form-group">
+          <input
+            type="file"
+            id="image"
+            accept=".jpg"
+            onChange={(event) => {
+              const image = event.target.files[0];
+              setImage(image);
+            }}
+          />
+        </div>
       </form>
+      <button className="btn btn-primary my-1" onClick={send}>
+        Send
+      </button>
+      <Link className="btn btn-light my-1" to="/dashboard">
+        Go Back
+      </Link>
     </Fragment>
   );
 };

@@ -16,11 +16,20 @@ const Dashboard = ({
     getCurrentProfile();
   }, [getCurrentProfile]);
 
-  return loading && profile == null ? (
+  return loading === true && profile === null ? (
     <Spinner />
-  ) : profile != null ? (
+  ) : profile !== null ? (
     <Fragment>
-      <Timeline experience={profile.experience} />
+      {profile.experience.length === 0 ? (
+        <Fragment>
+          <p>You have not yet added any experiences.</p>
+          <Link to="/add-experience" className="btn btn-primary my-1">
+            Add Experiences
+          </Link>
+        </Fragment>
+      ) : (
+        <Timeline experience={profile.experience} />
+      )}
     </Fragment>
   ) : (
     <Fragment>
