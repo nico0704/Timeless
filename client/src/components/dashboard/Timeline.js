@@ -1,6 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import { deleteExperience } from "../../actions/profile";
+import Moment from "react-moment";
 
 // Timeline Imports
 import {
@@ -10,7 +12,7 @@ import {
 import { ReactComponent as SchoolIcon } from "./school.svg";
 import "react-vertical-timeline-component/style.min.css";
 
-const Timeline = ({ experience }) => {
+const Timeline = ({ experience, deleteExperience }) => {
   let schoolIconStyles = { background: "#ecd76c" };
   return (
     <div>
@@ -19,7 +21,7 @@ const Timeline = ({ experience }) => {
           return (
             <VerticalTimelineElement
               key={element._id}
-              //date={element.date}
+              date={<Moment format="DD-MM-YYYY">{element.date}</Moment>}
               iconStyle={schoolIconStyles}
               icon={<SchoolIcon />}
             >
@@ -31,6 +33,10 @@ const Timeline = ({ experience }) => {
                 {element.location}
               </h5>
               <p>{element.description}</p>
+              <i
+                onClick={() => deleteExperience(element._id)}
+                className="far fa-trash-alt fa-2x"
+              ></i>
             </VerticalTimelineElement>
           );
         })}
@@ -41,6 +47,7 @@ const Timeline = ({ experience }) => {
 
 Timeline.propTypes = {
   experience: PropTypes.array.isRequired,
+  deleteExperience: PropTypes.func.isRequired,
 };
 
-export default connect(null)(Timeline);
+export default connect(null, { deleteExperience })(Timeline);

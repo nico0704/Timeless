@@ -3,8 +3,6 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { addExperience } from "../../actions/profile";
 import { Link, withRouter } from "react-router-dom";
-import FileUploadComponent from "./FileUpload";
-import axios from "axios";
 
 const AddExperience = ({ addExperience, history }) => {
   const [title, setTitle] = useState();
@@ -89,7 +87,7 @@ const AddExperience = ({ addExperience, history }) => {
           />
         </div>
         <div className="form-group">
-          <label class="custom-file-upload">
+          <label className="custom-file-upload">
             <input
               type="file"
               id="image"
@@ -99,7 +97,7 @@ const AddExperience = ({ addExperience, history }) => {
                 setImage(image);
               }}
             />
-            <i class="fas fa-image"></i> Upload Image
+            <i className="fas fa-image"></i> Upload Image
           </label>
         </div>
       </form>

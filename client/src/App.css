@@ -152,8 +152,20 @@ input[type="file"] {
   border: none;
   cursor: pointer;
   margin-right: 0.5rem;
+  margin-top: 0.5rem;
   transition: opacity 0.2s ease-in;
   outline: none;
+}
+
+.fa-trash-alt {
+  cursor: pointer;
+  margin-left: 95%;
+  margin-right: auto;
+  margin-top: 0.5rem;
+}
+
+.fa-trash-alt:hover {
+  color: rgb(95, 95, 95);
 }
 
 .badge {
@@ -340,7 +352,7 @@ button {
 }
 
 .navbar a:hover {
-  color: var(--primary-color);
+  color: var(--background-color);
 }
 
 .navbar .welcome span {
@@ -352,7 +364,7 @@ button {
   position: relative;
   /* background: url("../img/showcase.jpg") no-repeat center center/cover; */
   height: 100vh;
-  background-color: #dfd159;
+  background-color: var(--background-color);
 }
 
 .landing-inner {
