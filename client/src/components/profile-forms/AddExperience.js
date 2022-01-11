@@ -1,10 +1,19 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { addExperience } from "../../actions/profile";
+import { addExperience, getCurrentProfile } from "../../actions/profile";
 import { Link, withRouter } from "react-router-dom";
 
-const AddExperience = ({ addExperience, history }) => {
+const AddExperience = ({
+  getCurrentProfile,
+  addExperience,
+  history,
+  profile: { profile, loading },
+}) => {
+  useEffect(() => {
+    getCurrentProfile();
+  }, [getCurrentProfile]);
+
   const [title, setTitle] = useState();
   const [date, setDate] = useState();
   const [location, setLocation] = useState();
@@ -113,6 +122,13 @@ const AddExperience = ({ addExperience, history }) => {
 
 AddExperience.propTypes = {
   addExperience: PropTypes.func.isRequired,
+  profile: PropTypes.object.isRequired,
 };
 
-export default connect(null, { addExperience })(withRouter(AddExperience));
+const mapStateToProps = (state) => ({
+  profile: state.profile,
+});
+
+export default connect(mapStateToProps, { addExperience, getCurrentProfile })(
+  withRouter(AddExperience)
+);

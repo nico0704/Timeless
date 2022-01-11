@@ -8,8 +8,8 @@ import Spinner from "../layout/Spinner";
 import Timeline from "./Timeline";
 
 const Dashboard = ({
-  getCurrentProfile,
   auth: { user },
+  getCurrentProfile,
   profile: { profile, loading },
 }) => {
   useEffect(() => {
@@ -42,8 +42,8 @@ const Dashboard = ({
 };
 
 Dashboard.propTypes = {
-  getCurrentProfile: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
+  getCurrentProfile: PropTypes.func.isRequired,
   profile: PropTypes.object.isRequired,
 };
 

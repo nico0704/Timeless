@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { deleteExperience } from "../../actions/profile";
@@ -25,7 +26,9 @@ const Timeline = ({ experience, deleteExperience }) => {
               iconStyle={schoolIconStyles}
               icon={<SchoolIcon />}
             >
-              <img src={element.image} alt="Something"></img>
+              <Link to={`/profile/experience/${element._id}`}>
+                <img src={element.image} alt="Something"></img>
+              </Link>
               <h3 className="vertical-timeline-element-title">
                 {element.title}
               </h3>
