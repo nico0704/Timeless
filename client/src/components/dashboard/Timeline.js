@@ -28,14 +28,14 @@ const Timeline = ({ experience, deleteExperience }) => {
             >
               <Link to={`/profile/experience/${element._id}`}>
                 <img src={element.image} alt="Something"></img>
+                <h3 className="vertical-timeline-element-title">
+                  {element.title}
+                </h3>
+                <h5 className="vertical-timeline-element-subtitle">
+                  {element.location}
+                </h5>
+                <p className="timeline-p">{element.description}</p>
               </Link>
-              <h3 className="vertical-timeline-element-title">
-                {element.title}
-              </h3>
-              <h5 className="vertical-timeline-element-subtitle">
-                {element.location}
-              </h5>
-              <p>{element.description}</p>
               <i
                 onClick={() => deleteExperience(element._id)}
                 className="far fa-trash-alt fa-2x"

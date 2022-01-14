@@ -163,9 +163,23 @@ input[type="file"] {
   margin-right: auto;
   margin-top: 0.5rem;
 }
+.vertical-timeline-element-title,
+.vertical-timeline-element-subtitle,
+.timeline-p {
+  color: var(--dark-color);
+}
 
+.fa-edit {
+  color: #000000;
+  cursor: pointer;
+  margin-right: 95%;
+  margin-left: auto;
+  margin-top: 0.5rem;
+}
+
+.fa-edit:hover,
 .fa-trash-alt:hover {
-  color: rgb(95, 95, 95);
+  color: rgb(116, 116, 116);
 }
 
 .badge {

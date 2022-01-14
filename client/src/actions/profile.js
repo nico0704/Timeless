@@ -91,3 +91,12 @@ export const deleteExperience = (id) => async (dispatch) => {
     });
   }
 };
+
+// Get Experience
+// export const getExperience = (id) => async (dispatch) => {
+//   try {
+//     const res = await axios.get(`/api/profile/experience/${id}`);
+//   } catch (error) {
+
+//   }
+// };
