@@ -1,7 +1,13 @@
 import axios from "axios";
 import { setAlert } from "./alert";
 
-import { GET_PROFILE, PROFILE_ERROR, UPDATE_PROFILE } from "./types";
+import {
+  GET_PROFILE,
+  PROFILE_ERROR,
+  UPDATE_PROFILE,
+  GET_EXPERIENCE,
+  EXPERIENCE_ERROR,
+} from "./types";
 
 // Get current user profile (get api/profile/me)
 export const getCurrentProfile = () => async (dispatch) => {
@@ -21,7 +27,7 @@ export const getCurrentProfile = () => async (dispatch) => {
 };
 
 // Create or update profile
-export const createProfile = (formData, history) => async (dispatch) => {
+export const createProfile = (formData, navigate) => async (dispatch) => {
   try {
     const config = {
       headers: {
@@ -34,7 +40,7 @@ export const createProfile = (formData, history) => async (dispatch) => {
       payload: res.data,
     });
     dispatch(setAlert("Profile Created", "success"));
-    history.push("/dashboard");
+    navigate("/dashboard");
   } catch (err) {
     const errors = err.response.data.errors;
     if (errors) {
@@ -48,7 +54,7 @@ export const createProfile = (formData, history) => async (dispatch) => {
 };
 
 // Add Experience
-export const addExperience = (formData, history) => async (dispatch) => {
+export const addExperience = (formData, navigate) => async (dispatch) => {
   try {
     const config = {
       headers: {
@@ -62,7 +68,7 @@ export const addExperience = (formData, history) => async (dispatch) => {
       payload: res.data,
     });
     dispatch(setAlert("Experience Added", "success"));
-    history.push("/dashboard");
+    navigate("/dashboard");
   } catch (err) {
     const errors = err.response.data.errors;
     if (errors) {
@@ -92,11 +98,18 @@ export const deleteExperience = (id) => async (dispatch) => {
   }
 };
 
-// Get Experience
-// export const getExperience = (id) => async (dispatch) => {
-//   try {
-//     const res = await axios.get(`/api/profile/experience/${id}`);
-//   } catch (error) {
-
-//   }
-// };
+//Get Experience
+export const getExperience = (id) => async (dispatch) => {
+  try {
+    const res = await axios.get(`/api/profile/experience/${id}`);
+    dispatch({
+      type: GET_EXPERIENCE,
+      payload: res.data,
+    });
+  } catch (err) {
+    dispatch({
+      type: EXPERIENCE_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status },
+    });
+  }
+};

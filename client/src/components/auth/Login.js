@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { login } from "../../actions/auth";
-import { Redirect } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { setAlert } from "../../actions/alert";
 
 const Login = ({ isAuthenticated, login, setAlert }) => {
@@ -25,7 +25,7 @@ const Login = ({ isAuthenticated, login, setAlert }) => {
   };
 
   if (isAuthenticated) {
-    return <Redirect to="/dashboard" />;
+    return <Navigate to="/dashboard" />;
   }
 
   return (

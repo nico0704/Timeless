@@ -5,7 +5,7 @@ import { setAlert } from "../../actions/alert";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { register } from "../../actions/auth";
-import { Redirect } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
 const Register = ({ setAlert, isAuthenticated, register }) => {
   const [formData, setFormData] = useState({
@@ -32,7 +32,7 @@ const Register = ({ setAlert, isAuthenticated, register }) => {
   };
 
   if (isAuthenticated) {
-    return <Redirect to="/dashboard" />;
+    return <Navigate to="/dashboard" />;
   }
 
   return (

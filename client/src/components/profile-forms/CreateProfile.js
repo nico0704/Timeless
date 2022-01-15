@@ -2,7 +2,7 @@ import React, { Fragment, useState } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { createProfile } from "../../actions/profile";
-import { Link, withRouter } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const CreateProfile = ({ createProfile, history }) => {
   const [formData, setFormData] = useState({
@@ -11,13 +11,15 @@ const CreateProfile = ({ createProfile, history }) => {
     bio: "",
   });
 
+  const navigate = useNavigate();
+
   const { firstName, age, bio } = formData;
 
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
   const onSubmit = (e) => {
     e.preventDefault();
-    createProfile(formData, history);
+    createProfile(formData, history, navigate);
   };
   return (
     <Fragment>
@@ -68,4 +70,4 @@ CreateProfile.propTypes = {
   createProfile: PropTypes.func.isRequired,
 };
 
-export default connect(null, { createProfile })(withRouter(CreateProfile));
+export default connect(null, { createProfile })(CreateProfile);

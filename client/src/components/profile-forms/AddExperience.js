@@ -2,7 +2,7 @@ import React, { Fragment, useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { addExperience, getCurrentProfile } from "../../actions/profile";
-import { Link, withRouter } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const AddExperience = ({
   getCurrentProfile,
@@ -13,6 +13,7 @@ const AddExperience = ({
   useEffect(() => {
     getCurrentProfile();
   }, [getCurrentProfile]);
+  const navigate = useNavigate();
 
   const [title, setTitle] = useState();
   const [date, setDate] = useState();
@@ -31,7 +32,7 @@ const AddExperience = ({
     data.append("tag", tag);
     data.append("image", image);
 
-    addExperience(data, history);
+    addExperience(data, history, navigate);
   };
 
   return (
@@ -130,5 +131,5 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps, { addExperience, getCurrentProfile })(
-  withRouter(AddExperience)
+  AddExperience
 );

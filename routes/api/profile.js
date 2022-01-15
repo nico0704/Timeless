@@ -199,11 +199,11 @@ router.get(
         return res.status(400).json({ msg: "Experience not found" });
       }
 
-      let exp = profile.experience[ind];
-      if (!exp) {
+      let experience = profile.experience[ind];
+      if (!experience) {
         return res.status(400).json({ msg: "Experience not found" });
       }
-      res.json(exp);
+      res.json(experience);
     } catch (err) {
       console.error(err.message);
       res.status(500).send("Server Error");
