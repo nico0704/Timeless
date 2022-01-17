@@ -10,10 +10,10 @@ const AddExperience = ({
   history,
   profile: { profile, loading },
 }) => {
+  const navigate = useNavigate();
   useEffect(() => {
     getCurrentProfile();
   }, [getCurrentProfile]);
-  const navigate = useNavigate();
 
   const [title, setTitle] = useState();
   const [date, setDate] = useState();
@@ -32,91 +32,93 @@ const AddExperience = ({
     data.append("tag", tag);
     data.append("image", image);
 
-    addExperience(data, history, navigate);
+    addExperience(data, navigate);
   };
 
   return (
     <Fragment>
-      <h1 className="large text-primary">Add An Experience</h1>
-      <small>* = required field</small>
-      <form className="form" action="#">
-        <div className="form-group">
-          <input
-            type="text"
-            id="title"
-            placeholder="Title"
-            onChange={(event) => {
-              const { value } = event.target;
-              setTitle(value);
-            }}
-          />
-        </div>
-        <div className="form-group">
-          <input
-            type="date"
-            id="date"
-            onChange={(event) => {
-              const { value } = event.target;
-              setDate(value);
-            }}
-          />
-        </div>
-        <div className="form-group">
-          <input
-            type="text"
-            id="location"
-            placeholder="Location"
-            onChange={(event) => {
-              const { value } = event.target;
-              setLocation(value);
-            }}
-          />
-        </div>
-        <div className="form-group">
-          <textarea
-            type="text"
-            id="description"
-            cols="30"
-            rows="5"
-            placeholder="Description"
-            onChange={(event) => {
-              const { value } = event.target;
-              setDescription(value);
-            }}
-          />
-        </div>
-        <div className="form-group">
-          <input
-            type="text"
-            id="tag"
-            placeholder="Tag"
-            onChange={(event) => {
-              const { value } = event.target;
-              setTag(value);
-            }}
-          />
-        </div>
-        <div className="form-group">
-          <label className="custom-file-upload">
+      <section className="container">
+        <h1 className="large text-primary">Add An Experience</h1>
+        <small>* = required field</small>
+        <form className="form" action="#">
+          <div className="form-group">
             <input
-              type="file"
-              id="image"
-              accept=".jpg, .png, .jpeg"
+              type="text"
+              id="title"
+              placeholder="Title"
               onChange={(event) => {
-                const image = event.target.files[0];
-                setImage(image);
+                const { value } = event.target;
+                setTitle(value);
               }}
             />
-            <i className="fas fa-image"></i> Upload Image
-          </label>
-        </div>
-      </form>
-      <button className="btn btn-primary my-1" onClick={send}>
-        Send
-      </button>
-      <Link className="btn btn-light my-1" to="/dashboard">
-        Go Back
-      </Link>
+          </div>
+          <div className="form-group">
+            <input
+              type="date"
+              id="date"
+              onChange={(event) => {
+                const { value } = event.target;
+                setDate(value);
+              }}
+            />
+          </div>
+          <div className="form-group">
+            <input
+              type="text"
+              id="location"
+              placeholder="Location"
+              onChange={(event) => {
+                const { value } = event.target;
+                setLocation(value);
+              }}
+            />
+          </div>
+          <div className="form-group">
+            <textarea
+              type="text"
+              id="description"
+              cols="30"
+              rows="5"
+              placeholder="Description"
+              onChange={(event) => {
+                const { value } = event.target;
+                setDescription(value);
+              }}
+            />
+          </div>
+          <div className="form-group">
+            <input
+              type="text"
+              id="tag"
+              placeholder="Tag"
+              onChange={(event) => {
+                const { value } = event.target;
+                setTag(value);
+              }}
+            />
+          </div>
+          <div className="form-group">
+            <label className="custom-file-upload">
+              <input
+                type="file"
+                id="image"
+                accept=".jpg, .png, .jpeg"
+                onChange={(event) => {
+                  const image = event.target.files[0];
+                  setImage(image);
+                }}
+              />
+              <i className="fas fa-image"></i> Upload Image
+            </label>
+          </div>
+        </form>
+        <button className="btn btn-primary my-1" onClick={send}>
+          Send
+        </button>
+        <Link className="btn btn-light my-1" to="/dashboard">
+          Go Back
+        </Link>
+      </section>
     </Fragment>
   );
 };
