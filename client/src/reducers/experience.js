@@ -21,9 +21,10 @@ function experienceReducer(state = initialState, action) {
         ...state,
         error: payload,
         loading: false,
-        experience: null,
       };
     }
+    default:
+      return state;
   }
 }
 

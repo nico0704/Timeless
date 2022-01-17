@@ -5,11 +5,11 @@ import { getExperience } from "../../actions/profile";
 import { useParams } from "react-router-dom";
 
 const SingleExperience = (props) => {
-  console.log(props);
+  console.log(props.profile);
   const { id } = useParams();
   useEffect(() => {
     props.getExperience(id);
-  }, [getExperience, id]);
+  }, [props.getExperience, id]);
   return (
     <section className="container">
       <h1>Hello</h1>
@@ -18,12 +18,13 @@ const SingleExperience = (props) => {
 };
 
 SingleExperience.propTypes = {
+  profile: PropTypes.object.isRequired,
   getExperience: PropTypes.func.isRequired,
-  experience: PropTypes.object,
+  experience: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  experience: state.experience,
+  profile: state.profile,
 });
 
 export default connect(mapStateToProps, { getExperience })(SingleExperience);
