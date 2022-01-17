@@ -4,6 +4,8 @@ import { connect } from "react-redux";
 import { getExperience } from "../../actions/profile";
 import { useParams } from "react-router-dom";
 
+// Map through the experience array and get experience by params id and then display it...
+
 const SingleExperience = (props) => {
   console.log(props.profile);
   const { id } = useParams();
